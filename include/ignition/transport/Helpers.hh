@@ -38,6 +38,12 @@
   #define IGN_ZMQ_POST_4_3_1
 #endif
 
+#if CPPZMQ_VERSION >= 40700 
+  #ifndef UBUNTU_FOCAL
+    #define IGN_CPPZMQ_POST_4_7_0
+  #endif
+#endif
+
 namespace ignition
 {
   namespace transport

@@ -1068,7 +1068,7 @@ void NodeShared::OnNewConnection(const MessagePublisher &_pub)
       this->dataPtr->subscriber->connect(addr.c_str());
 
     // Add a new filter for the topic.
-#ifdef IGN_CPPZMQ_POST_4_7_0 
+#ifdef IGN_CPPZMQ_POST_4_7_0
     this->dataPtr->subscriber->set(zmq::sockopt::subscribe, topic);
 #else
     this->dataPtr->subscriber->setsockopt(ZMQ_SUBSCRIBE,
@@ -1263,7 +1263,7 @@ bool NodeShared::InitializeSockets()
 
 
     int lingerVal = 0;
-#ifdef IGN_CPPZMQ_POST_4_7_0 
+#ifdef IGN_CPPZMQ_POST_4_7_0
     this->dataPtr->publisher->set(zmq::sockopt::linger, lingerVal);
 #else
     this->dataPtr->publisher->setsockopt(ZMQ_LINGER,
@@ -1301,7 +1301,7 @@ bool NodeShared::InitializeSockets()
                   << std::endl;
       }
     }
-#ifdef IGN_CPPZMQ_POST_4_7_0 
+#ifdef IGN_CPPZMQ_POST_4_7_0
     this->dataPtr->subscriber->set(zmq::sockopt::rcvhwm, rcvQueueVal);
 #else
     this->dataPtr->subscriber->setsockopt(ZMQ_RCVHWM,
@@ -1339,7 +1339,7 @@ bool NodeShared::InitializeSockets()
                   << std::endl;
       }
     }
-#ifdef IGN_CPPZMQ_POST_4_7_0 
+#ifdef IGN_CPPZMQ_POST_4_7_0
     this->dataPtr->publisher->set(zmq::sockopt::sndhwm, sndQueueVal);
 
     this->dataPtr->publisher->bind(anyTcpEp.c_str());
@@ -1439,7 +1439,7 @@ int NodeShared::RcvHwm()
   int rcvHwm;
   try
   {
-#ifdef IGN_CPPZMQ_POST_4_7_0 
+#ifdef IGN_CPPZMQ_POST_4_7_0
     rcvHwm = this->dataPtr->subscriber->get(zmq::sockopt::rcvhwm);
 #else
     size_t rcvHwmSize = sizeof(rcvHwm);
@@ -1460,7 +1460,7 @@ int NodeShared::SndHwm()
   int sndHwm;
   try
   {
-#ifdef IGN_CPPZMQ_POST_4_7_0 
+#ifdef IGN_CPPZMQ_POST_4_7_0
     sndHwm = this->dataPtr->publisher->get(zmq::sockopt::sndhwm);
 #else
     size_t sndHwmSize = sizeof(sndHwm);
@@ -1561,7 +1561,7 @@ void NodeSharedPrivate::SecurityOnNewConnection()
   // See issue #74
   if (userPass(user, pass))
   {
-#ifdef IGN_CPPZMQ_POST_4_7_0 
+#ifdef IGN_CPPZMQ_POST_4_7_0
     this->subscriber->set(zmq::sockopt::plain_username, user);
     this->subscriber->set(zmq::sockopt::plain_password, pass);
 #else
@@ -1586,7 +1586,7 @@ void NodeSharedPrivate::SecurityInit()
     int asPlainSecurityServer = static_cast<int>(
         ZmqPlainSecurityServerOptions::ZMQ_PLAIN_SECURITY_SERVER_ENABLED);
 
-#ifdef IGN_CPPZMQ_POST_4_7_0 
+#ifdef IGN_CPPZMQ_POST_4_7_0
     this->publisher->set(zmq::sockopt::plain_server, asPlainSecurityServer);
     this->publisher->set(zmq::sockopt::zap_domain, kIgnAuthDomain);
 #else

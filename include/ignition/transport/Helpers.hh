@@ -38,10 +38,22 @@
   #define IGN_ZMQ_POST_4_3_1
 #endif
 
-#if CPPZMQ_VERSION >= 40700 
+
+#if CPPZMQ_VERSION >= ZMQ_MAKE_VERSION(4, 7, 0) 
   #ifndef UBUNTU_FOCAL
-    #define IGN_CPPZMQ_POST_4_7_0
+    #define IGN_CPPZMQ_POST_4_7_0 1
   #endif
+#endif
+
+
+#ifndef WARN_ONCE
+#define WARN_ONCE
+#define XSTR(x) STR(x)
+#define STR(x) #x
+#pragma message "CPPZMQ Ver: " XSTR(CPPZMQ_VERSION)
+#pragma message "ZMQ Ver: " XSTR(ZMQ_MAKE_VERSION(4, 7, 0))
+#pragma message "Is Focal? " XSTR(UBUNTU_FOCAL)
+#pragma message "Post 4.7.0" XSTR(IGN_CPPZMQ_POST_4_7_0)
 #endif
 
 namespace ignition
